@@ -1,0 +1,43 @@
+version: "3.7"
+
+services:
+  api:
+    restart: on-failure
+    build:
+      context: ./
+      dockerfile: docker/Dockerfile
+    image: cosmos_api/docker
+    container_name: cosmos_api
+    command: sh -c "python3 manage.py waitpgsql  &&
+      python3 manage.py makemigrations &&
+      python3 manage.py migrate &&
+      python3 manage.py runserver 0.0.0.0:8000"
+    ports:
+      - 8000:8000
+    volumes:
+      - ./:/api
+    networks:
+      - cosmos-network
+
+  database:
+    restart: on-failure
+    image: postgres:13
+    container_name: cosmos_postgres
+    ports:
+      - 5432
+    volumes:
+      - postgresdata:/var/lib/postgresql/data
+    networks:
+      - cosmos-network
+    environment:
+      - POSTGRES_USER=cosmos_user
+      - POSTGRES_PASSWORD=cosmos_password
+      - POSTGRES_DB=cosmos_django
+      - PG_DATA=/var/lib/postgresql/data
+
+volumes:
+  postgresdata:
+
+networks:
+  cosmos-network:
+    driver: bridge
