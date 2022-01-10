@@ -2,10 +2,12 @@
 
 <p>
   Cosmos application API based on Django REST framework.
-  
 </p>
 
 ## Developement
+
+It is the repository of the REST API of the Cosmos Book application.
+Everything you need to know about the different end-points is available in this documentation.
 
 ### Process
 
