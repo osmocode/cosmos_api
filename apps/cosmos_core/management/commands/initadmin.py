@@ -11,3 +11,5 @@ class Command(BaseCommand):
                 username=settings.DJANGO_USER,
                 email=settings.DJANGO_EMAIL,
                 password=settings.DJANGO_PASSWORD)
+            print("Default django user added successfully...")
+        print("Initadmin finish.")
