@@ -11,6 +11,7 @@ services:
     command: sh -c "python3 manage.py waitpgsql  &&
       python3 manage.py makemigrations &&
       python3 manage.py migrate &&
+      python3 manage.py initadmin &&
       python3 manage.py runserver 0.0.0.0:8000"
     ports:
       - 8000:8000
@@ -34,6 +35,9 @@ services:
       - POSTGRES_PASSWORD=cosmos_password
       - POSTGRES_DB=cosmos_django
       - PG_DATA=/var/lib/postgresql/data
+      - DJANGO_EMAIL=admin@default.fr
+      - DJANGO_USER=admin
+      - DJANGO_PASSWORD=password
 
 volumes:
   postgresdata:

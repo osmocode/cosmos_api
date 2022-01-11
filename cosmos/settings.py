@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -129,3 +130,11 @@ STATIC_URL = '/static/'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Default Django AdminUser settable from environnement var
+# DON'T DO THIS FOR PRODUCTION
+
+if DEBUG:
+    DJANGO_EMAIL = os.getenv('DJANGO_EMAIL', 'admin@default.fr')
+    DJANGO_USER = os.getenv('DJANGO_USER', 'admin')
+    DJANGO_PASSWORD = os.getenv('DJANGO_PASSWORD', 'password')
