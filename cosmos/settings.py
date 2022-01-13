@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'apps.cosmos_core',
+    'apps.cosmos_auth',
 ]
 
 MIDDLEWARE = [
